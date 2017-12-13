@@ -239,14 +239,14 @@ var LeftPanel = function LeftPanel(props, context) {
     React.createElement(
       View,
       { id: "left-panel-view", navbarThrough: true, dynamicNavbar: "true" },
-      context.framework7AppContext.theme.material ? React.createElement(Navbar, { title: "BinaryHaven" }) : null,
+      context.framework7AppContext.theme.ios ? React.createElement(Navbar, { title: "BinaryHaven" }) : null,
       React.createElement(
         Pages,
         null,
         React.createElement(
           Page,
           null,
-          context.framework7AppContext.theme.material ? React.createElement(Navbar, { title: "BinaryHaven" }) : null,
+          context.framework7AppContext.theme.ios ? React.createElement(Navbar, { title: "BinaryHaven" }) : null,
           React.createElement(
             ContentBlock,
             { inner: true },
@@ -303,7 +303,7 @@ var MainViews = function MainViews(props, context) {
     React.createElement(
       View,
       { id: "main-view", navbarThrough: true, dynamicNavbar: true, main: true, url: "/" },
-      context.framework7AppContext.theme.material ? React.createElement(
+      context.framework7AppContext.theme.ios ? React.createElement(
         Navbar,
         null,
         React.createElement(
@@ -323,7 +323,7 @@ var MainViews = function MainViews(props, context) {
         React.createElement(
           Page,
           null,
-          context.framework7AppContext.theme.material ? React.createElement(
+          context.framework7AppContext.theme.ios ? React.createElement(
             Navbar,
             null,
             React.createElement(
@@ -554,7 +554,7 @@ var App = function App() {
     //Change themeType to "ios" to use the ios theme
     React.createElement(
       Framework7App,
-      { themeType: "material", routes: routes },
+      { themeType: "ios", routes: routes },
       React.createElement(Statusbar, null),
       React.createElement(LeftPanel, null),
       React.createElement(MainViews, null),
