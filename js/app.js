@@ -572,7 +572,7 @@ var App = function App() {
 
 
 var myVar = setInterval(myTimer,1000);
-wsconnect();
+//wsconnect();
 
 function myTimer(){
   if(progressamount == 100){
