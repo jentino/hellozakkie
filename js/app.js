@@ -57,51 +57,51 @@ var wsmaster;
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 
-function wsconnect() {	
+// function wsconnect() {	
 	
-  //wsmaster = new WebSocket('ws://10.0.0.2:1337');
-  wsmaster = new WebSocket('ws://127.0.0.1:1337');
+//   //wsmaster = new WebSocket('ws://10.0.0.2:1337');
+//   wsmaster = new WebSocket('ws://127.0.0.1:1337');
 	
-	wsmaster.onopen = function(evtmaster) {
-		onOpenmaster(evtmaster,tokenmaster);
-	};
+// 	wsmaster.onopen = function(evtmaster) {
+// 		onOpenmaster(evtmaster,tokenmaster);
+// 	};
 	
-	wsmaster.onmessage = function(evtmaster) {
-		onMessagemaster(evtmaster);
-	};		
-}
+// 	wsmaster.onmessage = function(evtmaster) {
+// 		onMessagemaster(evtmaster);
+// 	};		
+// }
 
-onOpenmaster = function(evtmaster,tokenmaster) {
-	var token = tokenmaster;
-	wsmaster.send(JSON.stringify({
-		data: 'sendMeServerClock'
-	}));
-};
+// onOpenmaster = function(evtmaster,tokenmaster) {
+// 	var token = tokenmaster;
+// 	wsmaster.send(JSON.stringify({
+// 		data: 'sendMeServerClock'
+// 	}));
+// };
 
-var getthebalance = function() {
-	wsmaster.send(JSON.stringify({
-		data: 'requestBalance'
-	}));
-};
+// var getthebalance = function() {
+// 	wsmaster.send(JSON.stringify({
+// 		data: 'requestBalance'
+// 	}));
+// };
 
-onMessagemaster = function(msgmaster) {
+// onMessagemaster = function(msgmaster) {
   
-  try {
-      var json = JSON.parse(msgmaster.data);
-  }catch (e) {
-      console.log('Invalid JSON: ', msgmaster.data);
-  return;
-  }
-  if (json.type === 'timer') { 
-      showtimerclock = String(json.data);
-  }
-  if (json.type === 'balance') { 
-      showBalance = String(json.data);
-  }
-  if(json.type == 'fullname'){
-    showFullName = String(json.data);
-  }
-};
+//   try {
+//       var json = JSON.parse(msgmaster.data);
+//   }catch (e) {
+//       console.log('Invalid JSON: ', msgmaster.data);
+//   return;
+//   }
+//   if (json.type === 'timer') { 
+//       showtimerclock = String(json.data);
+//   }
+//   if (json.type === 'balance') { 
+//       showBalance = String(json.data);
+//   }
+//   if(json.type == 'fullname'){
+//     showFullName = String(json.data);
+//   }
+// };
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -372,7 +372,7 @@ var MainViews = function MainViews(props, context) {
                 { inner: true },
                 React.createElement(
                   Button,
-                  { opengetthebalance: "#getthebalance"},
+                  { openPopup: "#popup" },
                   "Connect"
                 )
               )
