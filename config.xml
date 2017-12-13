@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.phonegap.hellozaka" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="com.phonegap.hellozakie" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>BinaryHaven</name>
     <description>
         An online trading system that generates $10 per day
     </description>
-    <author email="support@phonegap.com" href="http://phonegap.com">
+    <author email="jentino@gmail.com" href="http://www.jentino.com">
         Binary Haven Team
     </author>
     <content src="index.html" />
