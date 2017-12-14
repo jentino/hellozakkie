@@ -357,7 +357,7 @@ var MainViews = function MainViews(props, context) {
               Progressbar,
               { progress: progressamount, color: "green" }),
             React.createElement(
-              "h1",
+              "center",
               {style: balanceStyle},
               "BALANCE $" + showBalance
             )
