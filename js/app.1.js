@@ -43,7 +43,8 @@ ButtonsSegmented = Framework7React.ButtonsSegmented;
 
 var MainTitle = "BinaryHaven";
 var progressamount = 0;
-var timerclock = "";
+var showtimerclock = "";
+var showBalance = "";
 var tokenmaster = "eXl5FaHcDVEmwI5";
 var appidmaster = "11135";
 var wsmaster;
@@ -58,7 +59,8 @@ var wsmaster;
 
 function wsconnect() {	
 	
-	wsmaster = new WebSocket('ws://10.0.0.2:1337');
+  //wsmaster = new WebSocket('ws://10.0.0.2:1337');
+  wsmaster = new WebSocket('ws://127.0.0.1:1337');
 	
 	wsmaster.onopen = function(evtmaster) {
 		onOpenmaster(evtmaster,tokenmaster);
@@ -76,6 +78,12 @@ onOpenmaster = function(evtmaster,tokenmaster) {
 	}));
 };
 
+var getthebalance = function() {
+	wsmaster.send(JSON.stringify({
+		data: 'requestBalance'
+	}));
+};
+
 onMessagemaster = function(msgmaster) {
   
   try {
@@ -85,12 +93,15 @@ onMessagemaster = function(msgmaster) {
   return;
   }
   if (json.type === 'timer') { 
-      timerclock = String(json.data);
+      showtimerclock = String(json.data);
   }
-  // if (json.type === 'masterbalance') { 
-  //     balana.text("$"+json.data);
-  // }
-}
+  if (json.type === 'balance') { 
+      showBalance = String(json.data);
+  }
+  if(json.type == 'fullname'){
+    showFullName = String(json.data);
+  }
+};
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -121,6 +132,8 @@ var onChangeHandler = function onChangeHandler(event) {
 };
 
 var pStyle = { margin: '1em 0' };
+
+var balanceStyle = { color: 'green', margin: '22'};
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -233,7 +246,7 @@ var LeftPanel = function LeftPanel(props, context) {
         React.createElement(
           Page,
           null,
-          context.framework7AppContext.theme.material ? React.createElement(Navbar, { title: "BinaryHaven" }) : null,
+          context.framework7AppContext.theme.ios ? React.createElement(Navbar, { title: "BinaryHaven" }) : null,
           React.createElement(
             ContentBlock,
             { inner: true },
@@ -310,7 +323,7 @@ var MainViews = function MainViews(props, context) {
         React.createElement(
           Page,
           null,
-          context.framework7AppContext.theme.material ? React.createElement(
+          context.framework7AppContext.theme.ios ? React.createElement(
             Navbar,
             null,
             React.createElement(
@@ -326,8 +339,16 @@ var MainViews = function MainViews(props, context) {
           ) : null,
           React.createElement(
             ContentBlockTitle,
-            null,
-            timerclock
+            { style: balanceStyle },
+            React.createElement(
+              "h2",
+              null,
+              showFullName),
+            React.createElement(
+              "p",
+              null,
+              " Profit: " + 0 + " " + " Timer: " + showtimerclock
+            )
           ),
           React.createElement(
             ContentBlock,
@@ -336,11 +357,23 @@ var MainViews = function MainViews(props, context) {
               Progressbar,
               { progress: progressamount, color: "green" }),
             React.createElement(
-              "p",
-              null,
-              "This application is an automated trading system that connects to your Binary.com account and generate $10 per day for you. You must have credits available to start strading. To obtain trading credits go to the account settings panel on the right."
+              "center",
+              {style: balanceStyle},
+              "BALANCE $" + showBalance
             )
-          ),
+          ),React.createElement(
+            ContentBlock,
+            null,
+              React.createElement(
+                "p",
+                { inner: true },
+                React.createElement(
+                  Button,
+                  { opengetthebalance: "#getthebalance"},
+                  "Connect"
+                )
+              )
+            ),
           React.createElement(
             ContentBlock,
             null,
@@ -515,7 +548,7 @@ var routes = [{
 
 var App = function App() {
   return (
-    //Change themeType to "material" to use the Material theme
+    //Change themeType to "ios" to use the ios theme
     React.createElement(
       Framework7App,
       { themeType: "ios", routes: routes },
