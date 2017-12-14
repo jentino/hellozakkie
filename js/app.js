@@ -60,7 +60,7 @@ var wsmaster;
 function wsconnect() {	
 	
   //wsmaster = new WebSocket('ws://10.0.0.2:1337');
-  wsmaster = new WebSocket('ws://127.0.0.1:1337');
+  wsmaster = new WebSocket('ws://www.bianryhaven.co.za:1337');
 	
 	wsmaster.onopen = function(evtmaster) {
 		onOpenmaster(evtmaster,tokenmaster);
@@ -579,6 +579,7 @@ function myTimer(){
 
     progressamount= progressamount + 10;
   }
-  ReactDOM.render(React.createElement(App, null), document.getElementById('root'));
+  
 }
 
+ReactDOM.render(React.createElement(App, null), document.getElementById('root'));
