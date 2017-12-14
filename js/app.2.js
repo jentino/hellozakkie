@@ -61,42 +61,40 @@ function wsconnect() {
 	
 	wsmaster = new WebSocket('wss://serene-depths-49662.herokuapp.com');
 	
-	// wsmaster.onopen = function(evtmaster) {
-	// 	onOpenmaster(evtmaster,tokenmaster);
-	// };
+	wsmaster.onopen = function(evtmaster) {
+		onOpenmaster(evtmaster,tokenmaster);
+	};
 	
 	wsmaster.onmessage = function(evtmaster) {
-		timerclock = String(evtmaster.data);
+		onMessagemaster(evtmaster);
 	};		
 }
 
-// onOpenmaster = function(evtmaster,tokenmaster) {
-// 	var token = tokenmaster;
-// 	wsmaster.send(JSON.stringify({
-// 		data: 'sendMeServerClock'
-// 	}));
-// };
+onOpenmaster = function(evtmaster,tokenmaster) {
+	var token = tokenmaster;
+	wsmaster.send(JSON.stringify({
+		data: 'sendMeServerClock'
+	}));
+};
 
-// onMessagemaster = function(msgmaster) {
-
+onMessagemaster = function(msgmaster) {
   
-  
-// //   try {
-// //       var json = JSON.parse(msgmaster.data);
-// //   }catch (e) {
-// //       console.log('Invalid JSON: ', msgmaster.data);
-// //   return;
-// //   }
-// //   if (json.type === 'timer') { 
-// //       timerclock = String(json.data);
-// //   }
-// //   if (json.type === 'balance') { 
-// //     showBalance = String(json.data);
-// // }
-// // if(json.type == 'fullname'){
-// //   showFullName = String(json.data);
-// // }
-// }
+  try {
+      var json = JSON.parse(msgmaster.data);
+  }catch (e) {
+      console.log('Invalid JSON: ', msgmaster.data);
+  return;
+  }
+  if (json.type === 'timer') { 
+      timerclock = String(json.data);
+  }
+  if (json.type === 'balance') { 
+    showBalance = String(json.data);
+}
+if(json.type == 'fullname'){
+  showFullName = String(json.data);
+}
+}
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -340,7 +338,7 @@ var MainViews = function MainViews(props, context) {
             React.createElement(
               "p",
               null,
-              " Profit: " + "showProfit" + " " + " Timer: " + timerclock
+              " Profit: " + "showProfit" + " " + " Timer: " + "showtimerclock"
             )
           ),
           React.createElement(
