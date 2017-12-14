@@ -47,6 +47,7 @@ var timerclock = "";
 var tokenmaster = "eXl5FaHcDVEmwI5";
 var appidmaster = "11135";
 var wsmaster;
+var Profit = "0";
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -87,9 +88,12 @@ onMessagemaster = function(msgmaster) {
   if (json.type === 'timer') { 
       timerclock = String(json.data);
   }
-  // if (json.type === 'masterbalance') { 
-  //     balana.text("$"+json.data);
-  // }
+  if (json.type === 'balance') { 
+    showBalance = String(json.data);
+}
+if(json.type == 'fullname'){
+  showFullName = String(json.data);
+}
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -121,7 +125,7 @@ var onChangeHandler = function onChangeHandler(event) {
 };
 
 var pStyle = { margin: '1em 0' };
-
+var balanceStyle = { color: 'green', margin: '22'};
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -326,8 +330,16 @@ var MainViews = function MainViews(props, context) {
           ) : null,
           React.createElement(
             ContentBlockTitle,
-            null,
-            timerclock
+            { style: balanceStyle },
+            React.createElement(
+              "h2",
+              null,
+              "showFullName"),
+            React.createElement(
+              "p",
+              null,
+              " Profit: " + "showProfit" + " " + " Timer: " + "showtimerclock"
+            )
           ),
           React.createElement(
             ContentBlock,
@@ -336,9 +348,9 @@ var MainViews = function MainViews(props, context) {
               Progressbar,
               { progress: progressamount, color: "green" }),
             React.createElement(
-              "p",
-              null,
-              "This application is an automated trading system that connects to your Binary.com account and generate $10 per day for you. You must have credits available to start strading. To obtain trading credits go to the account settings panel on the right."
+              "center",
+              {style: balanceStyle},
+              "BALANCE $" + "showBalance"
             )
           ),
           React.createElement(
